@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    let event = {
+        list : {} ,
+        listen : ( key , fn)=>{
+            if ( !event.list[key]){
+                event.list[key] = [];
+            }
+            event.list[key].push(fn);
+        },
+        trigger : ( key , data )=>{
+            if( !event.list[key] ){
+                return;
+            }
+            for ( let i =0 ;i<event.list[key].length ; i++ ){
+                event.list[key][i]( data );
+            }
+        },
+        remove : ( key , fn )=>{
+            if( event.list[key] ){
+                let index = event.list[key].indexOf(fn);
+                event.list[key].splice( index , 1 );
+            }else{
+                return;
+            }
+        }
+    };
+
+    event.listen( 'read', fn1 = function( data){
+        data = data || {};
+        console.log('一号订阅----');
+    })
+
+    event.listen( 'read',  fn2 =function( data){
+        data = data || {};
+        console.log('二号订阅----' );
+    })
+
+    event.trigger( 'read' , 100);
+    event.remove('read' , fn2);
+    event.remove('read' , fn1);
+</script>
+</body>
+</html>
