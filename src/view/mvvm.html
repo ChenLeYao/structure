@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+    function vm ( data ){
+        this.data = data;
+    }
+
+    vm.prototype.init = function(){
+        this.event.addWatch(data);
+        this.event.add('read' , f1 = function( data ){
+            console.log(data);
+            console.log('发布了read');
+        });
+    }
+
+    vm.prototype.defineProperty = function ( obj , key , value ){
+        Object.defineProperty( obj , key , {
+            enumerable : true ,
+            configurable  : true ,
+            get(){
+                return value;
+            },
+            set(  newValue  ){
+                if( value !== newValue ){
+                    value = newValue;
+                    event.subscribe('read' , value);
+                }
+            }
+        } )
+    };
+
+    //劫持数据变化
+    vm.prototype.addWatch  = function(  ){
+        Object.keys( this.data ).forEach( key => {
+            this.defineProperty( this.data , key , this.data[key] );
+        })
+    }
+
+    //发布订阅
+    vm.prototype.event = {
+        add( key , fn ){
+            if (!this.list[key]){
+                this.list[key] = [];
+            }
+            this.list[key].push(fn);
+        },
+        list : { } ,
+        remove( key , fn  ){
+            if (!this.list[key]){
+                return;
+            }
+            let index = this.list[key].indexOf(fn);
+            if ( index != -1){
+                this.list[key].splice( index , 1);
+            }
+        },
+        subscribe( key , data ){
+            if ( this.list[key] ){
+                this.list[key].forEach( item =>{
+                    item(data);
+                } )
+            }
+        }
+
+    }
+    let data = {
+        name : 'xiaoming' ,
+        type : 'action'
+    };
+
+    var mvvm = new vm(data);
+
+
+    console.log(mvvm);
+</script>
+</body>
+</html>

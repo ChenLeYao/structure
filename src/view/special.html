@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<style>
+    .panel {
+        position: fixed;
+        top:0;
+        left:0;
+        width: 60px;
+        height:1000px;
+        background-color: #1d1d21;
+        z-index: 899;
+    }
+    .panel_list {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 10px 0;
+    }
+    .panel_list li {
+        text-align: center;
+        position: relative;
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
+    }
+    .panel_list li  a {
+        display: block;
+        float: left;
+        font-size:11px;
+        width:60px;
+        height: 100%;
+        background-color: #1d1d21;
+        color:#808792;
+        transition:all 0.3s ease-in-out;
+    }
+    .panel_list li span{
+        position: absolute;
+        top:0;
+        right:0;
+        width: 80px;
+        text-align: center;
+        z-index:-1;
+        visibility: hidden;
+        background-color: #1d1d21;
+        border-right:2px solid #EB4F38;
+        color: #EB4F38;
+        transition:all 0.3s ease-in-out;
+        font-size:11px;
+    }
+    .panel_list li:hover a {
+        color: #EB4F38;
+    }
+    .panel_list li:hover span{
+        right:-80px;
+        visibility: visible;
+        transition:all 0.3s ease-in-out;
+        font-size:12px;
+    }
+</style>
+<div>
+    <div class="panel">
+        <ul class="panel_list">
+            <li><a>文章</a><span>说明</span></li>
+            <li><a>文章</a><span>说明</span></li>
+            <li><a>文章</a><span>说明</span></li>
+            <li><a>文章</a><span>说明</span></li>
+            <li><a>文章</a><span>说明</span></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

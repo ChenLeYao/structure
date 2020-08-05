@@ -34,12 +34,12 @@
 
     event.listen( 'read', fn1 = function( data){
         data = data || {};
-        console.log('一号订阅----');
+        console.log('read订阅----');
     })
 
     event.listen( 'read',  fn2 =function( data){
         data = data || {};
-        console.log('二号订阅----' );
+        console.log('read订阅----' );
     })
 
     event.trigger( 'read' , 100);
